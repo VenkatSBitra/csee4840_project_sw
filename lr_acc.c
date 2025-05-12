@@ -54,6 +54,7 @@ struct lr_acc_dev {
 /* Write background color */
 static void write_data(lr_acc_arg_t *data)
 {
+	printf("Writing data...\n");
 	// short x = (data->data1 >> 4) & 0x0f | ((data->data2 >> 4) & 0x0f) << 4 | ((data->data3 >> 4) & 0x0f) << 8 | ((data->data4 >> 4) & 0x0f) << 12;
 	// short y = (data->data1 & 0x0f) | ((data->data2 & 0x0f) << 4) | ((data->data3 & 0x0f) << 8) | ((data->data4 & 0x0f) << 12);
 	if (data->go) {
@@ -102,7 +103,7 @@ static long lr_acc_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 
 		case LR_ACC_READ_DATA:
 			read_data(&vla);
-			
+
 			if (copy_to_user((lr_acc_arg_t *) arg, &vla,
 					sizeof(lr_acc_arg_t)))
 				return -EACCES;
