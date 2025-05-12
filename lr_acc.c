@@ -101,10 +101,12 @@ static long lr_acc_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			break;
 
 		case LR_ACC_READ_DATA:
+			read_data(&vla);
+			
 			if (copy_to_user((lr_acc_arg_t *) arg, &vla,
 					sizeof(lr_acc_arg_t)))
 				return -EACCES;
-			read_data(&vla);
+			
 			break;
 
 		default:
