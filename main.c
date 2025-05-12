@@ -164,7 +164,7 @@ int main()
       return -1;
   }
 
-  printf("Read %d data points\n", n);
+  fprintf(stderr, "Read %d data points\n", n);
 
   lr_acc_data_t *d = (lr_acc_data_t *)malloc(sizeof(lr_acc_data_t));
 
@@ -183,18 +183,18 @@ int main()
   vla.go = 1;
   set_lr_data(&vla);  
 
-  printf("Data sent to the device\n");
+  fprintf(stderr, "Data sent to the device\n");
 
-  printf("Waiting for the device to finish processing...\n");
+  fprintf(stderr, "Waiting for the device to finish processing...\n");
 
   sleep(1);
 
   read_lr_data(&vla);
 
-  printf("First: %d\n", vla.data.data);
-  printf("Second: %d\n", vla.address >> 8);
-  printf("Third: %d\n", vla.address & 0xFF);
+  fprintf(stderr, "First: %d\n", vla.data.data);
+  fprintf(stderr, "Second: %d\n", vla.address >> 8);
+  fprintf(stderr, "Third: %d\n", vla.address & 0xFF);
 
-  printf("LR Accumulator Userspace program terminating\n");
+  fprintf(stderr, "LR Accumulator Userspace program terminating\n");
   return 0;
 }

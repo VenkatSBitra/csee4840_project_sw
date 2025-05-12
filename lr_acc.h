@@ -2,6 +2,7 @@
 #define _lr_acc_H
 
 #include <linux/ioctl.h>
+#include <stdio.h>
 
 typedef struct {
   char data;
