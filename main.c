@@ -166,6 +166,7 @@ int main()
       vla.go = 0;
 
       printf("Setting data: %d\n", data[i]);
+      printf("x: %d, y: %d\n", (data[i] >> 4) & 0x0F, data[i] & 0x0F);
 
       set_lr_data(&vla);
   }
