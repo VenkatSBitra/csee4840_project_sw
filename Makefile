@@ -19,7 +19,7 @@ clean:
 	${MAKE} -C ${KERNEL_SOURCE} SUBDIRS=${PWD} clean
 	${RM} main
 
-TARFILES = Makefile README vga_ball.h vga_ball.c main.c
+TARFILES = Makefile README lr_acc.h lr_acc.c main.c
 TARFILE = lab3-sw.tar.gz
 .PHONY : tar
 tar : $(TARFILE)
