@@ -66,6 +66,7 @@ static void write_data(lr_acc_arg_t *data)
 
 static void read_data(lr_acc_arg_t *data)
 {
+	printf("Reading data...\n");
     int a  = ioread32(dev.virtbase + 0);
     int b  = ioread32(dev.virtbase + 4);
     int c  = ioread32(dev.virtbase + 8);
