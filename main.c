@@ -187,6 +187,8 @@ int main()
 
   printf("Waiting for the device to finish processing...\n");
 
+  sleep(1);
+
   read_lr_data(&vla);
 
   printf("First: %d\n", vla.data.data);
