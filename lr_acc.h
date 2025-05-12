@@ -4,13 +4,13 @@
 #include <linux/ioctl.h>
 
 typedef struct {
-  uint8_t data;
+  char data;
 } lr_acc_data_t;
 
 typedef struct {
   lr_acc_data_t data;
   short address;
-  uint8_t go;
+  char go;
 } lr_acc_arg_t;
   
 

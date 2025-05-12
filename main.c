@@ -17,7 +17,7 @@
 
 int lr_acc_fd;
 
-int read_data(const char *fpath, uint8_t **data) {
+int read_data(const char *fpath, char **data) {
   FILE *fp = fopen(fpath, "r");
   if (fp == NULL) {
       perror("Error opening file");
@@ -30,7 +30,7 @@ int read_data(const char *fpath, uint8_t **data) {
   fscanf(fp, "%d", &n);
 
   // Allocate memory for the data
-  *data = (uint8_t *)malloc(n * sizeof(uint8_t));
+  *data = (char *)malloc(n * sizeof(char));
   if (data == NULL) {
       perror("Error allocating memory");
       fclose(fp);
@@ -39,7 +39,7 @@ int read_data(const char *fpath, uint8_t **data) {
 
   // Read the data into the array
   for (int i = 0; i < n; i++) {
-      uint8_t x, y;
+      char x, y;
       fscanf(fp, "%u %u", &y, &x);
       (*data)[i] = (x << 4) | y;
   }
@@ -102,7 +102,7 @@ int main()
   int i;
   static const char filename[] = "/dev/lr_acc";
 
-  uint8_t *data = NULL;
+  char *data = NULL;
   int n = read_data("preprocessed_data.txt", &data);
   if (n < 0) {
       fprintf(stderr, "Error reading data\n");
