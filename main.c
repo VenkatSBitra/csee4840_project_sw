@@ -102,6 +102,12 @@ int main()
   int i;
   static const char filename[] = "/dev/lr_acc";
 
+  if ((lr_acc_fd = open(filename, O_RDWR)) == -1)
+  {
+    fprintf(stderr, "could not open %s\n", filename);
+    return -1;
+  }
+
   char *data = NULL;
   int n = read_data("preprocessed_data.txt", &data);
   if (n < 0) {
@@ -127,13 +133,7 @@ int main()
 
   printf("VGA ball Userspace program started\n");
 
-  if ((lr_acc_fd = open(filename, O_RDWR)) == -1)
-  {
-    fprintf(stderr, "could not open %s\n", filename);
-    return -1;
-  }
-
-  printf("initial state: ");
+  
 
   
 
