@@ -130,7 +130,7 @@ void set_lr_data(const lr_acc_arg_t *d)
 
   if (ioctl(lr_acc_fd, LR_ACC_WRITE_DATA, d))
   {
-    perror("ioctl(LR_ACC_SET_DATA) failed");
+    printf("ioctl(LR_ACC_SET_DATA) failed");
     return;
   }
 }
@@ -139,7 +139,7 @@ void read_lr_data(lr_acc_arg_t *d)
 {
   if (ioctl(lr_acc_fd, LR_ACC_READ_DATA, d))
   {
-    perror("ioctl(LR_ACC_GET_DATA) failed");
+    printf("ioctl(LR_ACC_GET_DATA) failed");
     return;
   }
 }
