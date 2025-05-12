@@ -59,17 +59,16 @@ static void write_data(lr_acc_arg_t *data)
 	if (data->go) {
 		iowrite32((u32)1, dev.virtbase + (1 << 9));
 	} else {
-		iowrite32((u32)data->data.data, dev.virtbase + data->address);
+		iowrite32((u32)data->data.data, dev.virtbase + data->address * 4);
 	}
 	
 }
 
 static void read_data(lr_acc_arg_t *data)
 {
-    data->go         = ioread32(dev.virtbase + 0);
-    data->data.data  = ioread32(dev.virtbase + 4);
-    uint32_t hi      = ioread32(dev.virtbase + 8);
-    uint32_t lo      = ioread32(dev.virtbase + 12);
+    data->data.data  = ioread32(dev.virtbase + 0);
+    uint32_t hi      = ioread32(dev.virtbase + 4);
+    uint32_t lo      = ioread32(dev.virtbase + 8);
     data->address    = (hi << 8) | (lo & 0xFF);
 }
 /*
