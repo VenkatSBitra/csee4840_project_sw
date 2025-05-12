@@ -1,3 +1,4 @@
+make clean
 git pull
 make
 insmod lr_acc.ko
