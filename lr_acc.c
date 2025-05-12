@@ -68,13 +68,13 @@ static void write_data(lr_acc_arg_t *data)
 static void read_data(lr_acc_arg_t *data)
 {
 	printf("Reading data...\n");
-    u32 a  = ioread32(dev.virtbase + 0);
-    u32 b  = ioread32(dev.virtbase + 4);
-    u32 c  = ioread32(dev.virtbase + 8);
-	u32 d = ioread32(dev.virtbase + 12);
-	u32 e = ioread32(dev.virtbase + 16);
-	u32 f = ioread32(dev.virtbase + 20);
-	u32 g = ioread32(dev.virtbase + 24);
+    int a  = ioread32(dev.virtbase + 0);
+    int b  = ioread32(dev.virtbase + 4);
+    int c  = ioread32(dev.virtbase + 8);
+	int d = ioread32(dev.virtbase + 12);
+	int e = ioread32(dev.virtbase + 16);
+	int f = ioread32(dev.virtbase + 20);
+	int g = ioread32(dev.virtbase + 24);
     // data->address    = (hi << 8) | (lo & 0xFF);
 	printf("First: %d\n", a);
 	printf("Second: %d\n", b);
