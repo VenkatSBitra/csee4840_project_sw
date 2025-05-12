@@ -115,6 +115,8 @@ int main()
       return -1;
   }
 
+  printf("Read %d data points\n", n);
+
   lr_acc_data_t d;
 
   for (int i = 0; i < n; i++) {
@@ -129,13 +131,7 @@ int main()
   }
 
   vla.go = 1;
-  set_lr_data(&vla);
-
-  printf("VGA ball Userspace program started\n");
-
-  
-
-  
+  set_lr_data(&vla);  
 
   printf("LR Accumulator Userspace program terminating\n");
   return 0;
