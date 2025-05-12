@@ -57,9 +57,9 @@ static void write_data(lr_acc_arg_t *data)
 	// short x = (data->data1 >> 4) & 0x0f | ((data->data2 >> 4) & 0x0f) << 4 | ((data->data3 >> 4) & 0x0f) << 8 | ((data->data4 >> 4) & 0x0f) << 12;
 	// short y = (data->data1 & 0x0f) | ((data->data2 & 0x0f) << 4) | ((data->data3 & 0x0f) << 8) | ((data->data4 & 0x0f) << 12);
 	if (data->go) {
-		iowrite32(1, dev.virtbase + (1 << 9));
+		iowrite32((u32)1, dev.virtbase + (1 << 9));
 	} else {
-		iowrite32(data->data, dev.virtbase + data->address);
+		iowrite32((u32)data->data.data, dev.virtbase + data->address);
 	}
 	
 }
