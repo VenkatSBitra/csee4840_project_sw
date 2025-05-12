@@ -64,6 +64,14 @@ static void write_data(lr_acc_arg_t *data)
 	
 }
 
+static void read_data(lr_acc_arg_t *data)
+{
+    data->go         = ioread32(dev.virtbase + 0);
+    data->data.data  = ioread32(dev.virtbase + 4);
+    uint32_t hi      = ioread32(dev.virtbase + 8);
+    uint32_t lo      = ioread32(dev.virtbase + 12);
+    data->address    = (hi << 8) | (lo & 0xFF);
+}
 /*
  * Handle ioctl() calls from userspace:
  * Read or write the segments on single digits.
@@ -85,6 +93,7 @@ static long lr_acc_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			if (copy_to_user((lr_acc_arg_t *) arg, &vla,
 					sizeof(lr_acc_arg_t)))
 				return -EACCES;
+			read_data(&vla);
 			break;
 
 		default:

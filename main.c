@@ -135,6 +135,15 @@ void set_lr_data(const lr_acc_arg_t *d)
   }
 }
 
+void read_lr_data(lr_acc_arg_t *d)
+{
+  if (ioctl(lr_acc_fd, LR_ACC_READ_DATA, d))
+  {
+    perror("ioctl(LR_ACC_GET_DATA) failed");
+    return;
+  }
+}
+
 int main()
 {
   lr_acc_arg_t vla;
@@ -173,6 +182,16 @@ int main()
 
   vla.go = 1;
   set_lr_data(&vla);  
+
+  printf("Data sent to the device\n");
+
+  printf("Waiting for the device to finish processing...\n");
+
+  read_lr_data(&vla);
+
+  printf("First: %d\n", vla.data.data);
+  printf("Second: %d\n", vla.address >> 8);
+  printf("Third: %d\n", vla.address & 0xFF);
 
   printf("LR Accumulator Userspace program terminating\n");
   return 0;
