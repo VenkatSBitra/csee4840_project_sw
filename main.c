@@ -109,7 +109,7 @@ int main()
   }
 
   char *data = NULL;
-  int n = read_data("preprocessed_data.txt", &data);
+  int n = read_data("/root/csee4840_project_sw/preprocessed_data.txt", &data);
   if (n < 0) {
       fprintf(stderr, "Error reading data\n");
       return -1;
