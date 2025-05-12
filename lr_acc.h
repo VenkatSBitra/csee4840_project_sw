@@ -2,7 +2,6 @@
 #define _lr_acc_H
 
 #include <linux/ioctl.h>
-#include <stdio.h>
 
 typedef struct {
   char data;
@@ -13,6 +12,10 @@ typedef struct {
   short address;
   char go;
 } lr_acc_arg_t;
+
+typedef struct {
+  int a, b, c, d, e, f, g;
+} lr_acc_read_data_t;
   
 
 #define LR_ACC_MAGIC 'q'
