@@ -66,10 +66,13 @@ static void write_data(lr_acc_arg_t *data)
 
 static void read_data(lr_acc_arg_t *data)
 {
-    data->data.data  = ioread32(dev.virtbase + 0);
-    uint32_t hi      = ioread32(dev.virtbase + 4);
-    uint32_t lo      = ioread32(dev.virtbase + 8);
-    data->address    = (hi << 8) | (lo & 0xFF);
+    int a  = ioread32(dev.virtbase + 0);
+    int b  = ioread32(dev.virtbase + 4);
+    int c  = ioread32(dev.virtbase + 8);
+    // data->address    = (hi << 8) | (lo & 0xFF);
+	printf("First: %d\n", a);
+	printf("Second: %d\n", b);
+	printf("Third: %d\n", c);
 }
 /*
  * Handle ioctl() calls from userspace:
