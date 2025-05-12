@@ -117,6 +117,8 @@ int main()
       vla.address = i;
       vla.go = 0;
 
+      printf("Setting data: %d\n", data[i]);
+
       set_lr_data(&vla);
   }
 
