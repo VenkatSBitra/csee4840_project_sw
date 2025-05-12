@@ -91,7 +91,7 @@ void set_lr_data(const lr_acc_arg_t *d)
 
   if (ioctl(lr_acc_fd, LR_ACC_WRITE_DATA, d))
   {
-    perror("ioctl(lr_acc_SET_DATA) failed");
+    perror("ioctl(LR_ACC_SET_DATA) failed");
     return;
   }
 }
