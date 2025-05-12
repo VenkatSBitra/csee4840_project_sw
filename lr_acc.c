@@ -56,6 +56,7 @@ struct lr_acc_dev {
 static void write_data(lr_acc_arg_t *data)
 {
 	// fprintf(stderr, "Writing data...\n");
+	pr_info("Writing data...\n");
 	// short x = (data->data1 >> 4) & 0x0f | ((data->data2 >> 4) & 0x0f) << 4 | ((data->data3 >> 4) & 0x0f) << 8 | ((data->data4 >> 4) & 0x0f) << 12;
 	// short y = (data->data1 & 0x0f) | ((data->data2 & 0x0f) << 4) | ((data->data3 & 0x0f) << 8) | ((data->data4 & 0x0f) << 12);
 	if (data->go) {
@@ -85,6 +86,16 @@ static void read_data(lr_acc_arg_t *data)
 	// fprintf(stderr, "Fifth: %d\n", e);
 	// fprintf(stderr, "Sixth: %d\n", f);
 	// fprintf(stderr, "Seventh: %d\n", g);
+
+	pr_info("First: %d\n", a);
+	pr_info("Second: %d\n", b);
+	pr_info("Third: %d\n", c);
+	pr_info("Fourth: %d\n", d);
+	pr_info("Fifth: %d\n", e);
+	pr_info("Sixth: %d\n", f);
+	pr_info("Seventh: %d\n", g);
+	pr_info("Eighth: %d\n", h);
+
 	dev.read_data.a = a;
 	dev.read_data.b = b;
 	dev.read_data.c = c;
