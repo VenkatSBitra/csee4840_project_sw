@@ -166,11 +166,11 @@ int main()
 
   printf("Read %d data points\n", n);
 
-  lr_acc_data_t d;
+  lr_acc_data_t *d = (lr_acc_data_t *)malloc(sizeof(lr_acc_data_t));
 
   for (int i = 0; i < n; i++) {
-      d.data = data[i];
-      vla.data = d;
+      d->data = data[i];
+      vla.data = *d;
       vla.address = i;
       vla.go = 0;
 
