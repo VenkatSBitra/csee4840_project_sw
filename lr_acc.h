@@ -2,7 +2,6 @@
 #define _lr_acc_H
 
 #include <linux/ioctl.h>
-#include <stdint.h>
 
 typedef struct {
   uint8_t data;
