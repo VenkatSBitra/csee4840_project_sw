@@ -191,7 +191,7 @@ int main()
 
   read_lr_data(&vla);
 
-  fprintf(stderr, "First: %d\n", vla.data.data);
+  fprintf(stderr, "First: %d\n", vla.address);
   fprintf(stderr, "Second: %d\n", vla.address >> 8);
   fprintf(stderr, "Third: %d\n", vla.address & 0xFF);
 

@@ -76,6 +76,7 @@ static void read_data(lr_acc_arg_t *data)
 	int e = ioread32(dev.virtbase + 16);
 	int f = ioread32(dev.virtbase + 20);
 	int g = ioread32(dev.virtbase + 24);
+	int h = ioread32(dev.virtbase + 28);
     // data->address    = (hi << 8) | (lo & 0xFF);
 	// fprintf(stderr, "First: %d\n", a);
 	// fprintf(stderr, "Second: %d\n", b);
@@ -91,6 +92,8 @@ static void read_data(lr_acc_arg_t *data)
 	dev.read_data.e = e;
 	dev.read_data.f = f;
 	dev.read_data.g = g;
+
+	data->data.address = d;
 }
 /*
  * Handle ioctl() calls from userspace:
