@@ -93,7 +93,7 @@ static void read_data(lr_acc_arg_t *data)
 	dev.read_data.f = f;
 	dev.read_data.g = g;
 
-	data->data.address = d;
+	data->address = d;
 }
 /*
  * Handle ioctl() calls from userspace:
