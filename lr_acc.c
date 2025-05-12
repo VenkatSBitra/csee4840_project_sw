@@ -59,7 +59,7 @@ static void write_data(lr_acc_arg_t *data)
 	if (data->go) {
 		iowrite32((u32)1, dev.virtbase + (1 << 9));
 	} else {
-		iowrite32((u32)data->data.data, dev.virtbase + data->address * 4);
+		iowrite32((u32)data->data.data, dev.virtbase + 1);
 	}
 	
 }
