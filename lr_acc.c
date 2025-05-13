@@ -59,10 +59,8 @@ static void write_data(lr_acc_arg_t *data)
 	// short x = (data->data1 >> 4) & 0x0f | ((data->data2 >> 4) & 0x0f) << 4 | ((data->data3 >> 4) & 0x0f) << 8 | ((data->data4 >> 4) & 0x0f) << 12;
 	// short y = (data->data1 & 0x0f) | ((data->data2 & 0x0f) << 4) | ((data->data3 & 0x0f) << 8) | ((data->data4 & 0x0f) << 12);
 	if (data->go) {
-		pr_info("Writing data to go...\n");
 		iowrite32((u32)1, dev.virtbase + 4 * ((1 << 9) + data->address));
 	} else {
-		pr_info("Writing data to address %d...\n", data->address);
 		iowrite32((u32)data->data.data, dev.virtbase + 4 * data->address);
 	}
 	
@@ -80,24 +78,6 @@ static void read_data(lr_acc_read_data_t *data)
 	int g = ioread32(dev.virtbase + 24);
 	int h = ioread32(dev.virtbase + 28);
 	int i = ioread32(dev.virtbase + 32);
-    // data->address    = (hi << 8) | (lo & 0xFF);
-	// fprintf(stderr, "First: %d\n", a);
-	// fprintf(stderr, "Second: %d\n", b);
-	// fprintf(stderr, "Third: %d\n", c);
-	// fprintf(stderr, "Fourth: %d\n", d);
-	// fprintf(stderr, "Fifth: %d\n", e);
-	// fprintf(stderr, "Sixth: %d\n", f);
-	// fprintf(stderr, "Seventh: %d\n", g);
-
-	pr_info("First: %d\n", a);
-	pr_info("Second: %d\n", b);
-	pr_info("Third: %d\n", c);
-	pr_info("Fourth: %d\n", d);
-	pr_info("Fifth: %d\n", e);
-	pr_info("Sixth: %d\n", f);
-	pr_info("Seventh: %d\n", g);
-	pr_info("Eighth: %d\n", h);
-	pr_info("Ninth: %d\n", i);
 
 	data->master_done = a;
 	data->d = b;

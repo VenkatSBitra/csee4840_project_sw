@@ -7,6 +7,7 @@
  */
 
 #include <stdio.h>
+#include <time.h>
 #include "lr_acc.h"
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -98,6 +99,11 @@ int main()
 
   lr_acc_data_t *d = (lr_acc_data_t *)malloc(sizeof(lr_acc_data_t));
 
+  clock_t start, end;
+  double cpu_time_used;
+
+  start = clock();
+
   vla.go = 1;
   vla.address = 0;
 
@@ -112,22 +118,42 @@ int main()
       set_lr_data(&vla);
   }
 
+  end = clock();
+
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+  fprintf(stderr, "Time taken to send data: %f seconds\n", cpu_time_used);
+
+  start = clock();
   vla.go = 1;
   vla.address = n;
   set_lr_data(&vla);  
 
-  fprintf(stderr, "Data sent to the device\n");
+  // fprintf(stderr, "Data sent to the device\n");
 
-  fprintf(stderr, "Waiting for the device to finish processing...\n");
+  // fprintf(stderr, "Waiting for the device to finish processing...\n");
 
   while (1)
   {
-    sleep(1);
     read_lr_data(&obj);
 
     if (obj.master_done == 1)
       break;
+
+    usleep(1); // Sleep for 1 microsecond
   }
+
+  end = clock();
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+  fprintf(stderr, "Time taken to process and read data: %f seconds\n", cpu_time_used);
+
+  start = clock();
+
+  double w0 = (double)obj.n0 / (double)obj.d;
+  double w1 = (double)obj.n1 / (double)obj.d;
+
+  end = clock();
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+  fprintf(stderr, "Time taken to calculate weights: %f seconds\n", cpu_time_used);
   
   fprintf(stderr, "Device finished processing\n");
   fprintf(stderr, "Results:\n");
@@ -139,11 +165,7 @@ int main()
   fprintf(stderr, "s3: %d\n", obj.s3);
   fprintf(stderr, "s4: %d\n", obj.s4);
   fprintf(stderr, "s5: %d\n", obj.s5);
-
-  fprintf(stderr, "Calculating Weights\n");
-  double w0 = (double)obj.n0 / (double)obj.d;
-  double w1 = (double)obj.n1 / (double)obj.d;
-
+  fprint(stderr, "Weights:\n");
   fprintf(stderr, "w0: %f\n", w0);
   fprintf(stderr, "w1: %f\n", w1);
 
