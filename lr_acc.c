@@ -79,6 +79,7 @@ static void read_data(lr_acc_arg_t *data)
 	int f = ioread32(dev.virtbase + 20);
 	int g = ioread32(dev.virtbase + 24);
 	int h = ioread32(dev.virtbase + 28);
+	int i = ioread32(dev.virtbase + 32);
     // data->address    = (hi << 8) | (lo & 0xFF);
 	// fprintf(stderr, "First: %d\n", a);
 	// fprintf(stderr, "Second: %d\n", b);
@@ -96,6 +97,7 @@ static void read_data(lr_acc_arg_t *data)
 	pr_info("Sixth: %d\n", f);
 	pr_info("Seventh: %d\n", g);
 	pr_info("Eighth: %d\n", h);
+	pr_info("Ninth: %d\n", i);
 
 	dev.read_data.a = a;
 	dev.read_data.b = b;
@@ -105,7 +107,8 @@ static void read_data(lr_acc_arg_t *data)
 	dev.read_data.f = f;
 	dev.read_data.g = g;
 
-	data->address = d;
+	data->address = e;
+	data->go = a;
 }
 /*
  * Handle ioctl() calls from userspace:

@@ -193,9 +193,15 @@ int main()
 
   fprintf(stderr, "Waiting for the device to finish processing...\n");
 
-  sleep(1);
+  while (1)
+  {
+    sleep(1);
+    read_lr_data(&vla);
 
-  read_lr_data(&vla);
+    if (vla.go == 0)
+      break;
+  }
+  
 
   fprintf(stderr, "First: %d\n", vla.address);
   fprintf(stderr, "Second: %d\n", vla.address >> 8);
