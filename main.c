@@ -55,76 +55,6 @@ int read_data_from_array(char **data) {
     return NUM_ENTRIES;
 }
 
-
-// int read_data(const char *fpath, char **data) {
-//   FILE *fp = fopen(fpath, "r");
-//   if (fp == NULL) {
-//       perror("Error opening file");
-//       return -1;
-//   }
-
-//   int n;
-
-//   // Read the first line to get the dimensions
-//   fscanf(fp, "%d", &n);
-
-//   // Allocate memory for the data
-//   *data = (char *)malloc(n * sizeof(char));
-//   if (data == NULL) {
-//       perror("Error allocating memory");
-//       fclose(fp);
-//       return -1;
-//   }
-
-//   // Read the data into the array
-//   for (int i = 0; i < n; i++) {
-//       char x, y;
-//       fscanf(fp, "%u %u", &y, &x);
-//       (*data)[i] = (x << 4) | y;
-//   }
-
-//   fclose(fp);
-
-//   return n;
-// }
-
-/* Read and print the background color */
-// void print_background_color()
-// {
-//   lr_acc_arg_t vla;
-
-//   if (ioctl(lr_acc_fd, LR_ACC_READ_BACKGROUND, &vla))
-//   {
-//     perror("ioctl(lr_acc_READ_BACKGROUND) failed");
-//     return;
-//   }
-//   printf("%02x %02x %02x\n",
-//          vla.background.red, vla.background.green, vla.background.blue);
-// }
-
-/* Set the background color */
-// void set_background_color(const lr_acc_color_t *c)
-// {
-//   lr_acc_arg_t vla;
-//   vla.background = *c;
-//   if (ioctl(lr_acc_fd, LR_ACC_WRITE_BACKGROUND, &vla))
-//   {
-//     perror("ioctl(lr_acc_SET_BACKGROUND) failed");
-//     return;
-//   }
-// }
-
-// void set_ball_position(const lr_acc_position_t *p)
-// {
-//   lr_acc_arg_t vla;
-//   vla.position = *p;
-//   if (ioctl(lr_acc_fd, LR_ACC_WRITE_POSITION, &vla))
-//   {
-//     perror("ioctl(lr_acc_SET_POSITION) failed");
-//     return;
-//   }
-// }
-
 void set_lr_data(const lr_acc_arg_t *d)
 {
 
@@ -157,7 +87,6 @@ int main()
   }
 
   char *data = NULL;
-  // int n = read_data("/root/csee4840_project_sw/preprocessed_data.txt", &data);
   int n = read_data_from_array(&data);
   if (n < 0) {
       fprintf(stderr, "Error reading data\n");
@@ -179,9 +108,6 @@ int main()
       vla.address = i;
       vla.go = 0;
 
-      // printf("Setting data: %d\n", data[i]);
-      // printf("x: %d, y: %d\n", (data[i] >> 4) & 0x0F, data[i] & 0x0F);
-
       set_lr_data(&vla);
   }
 
@@ -197,6 +123,7 @@ int main()
   {
     sleep(1);
     vla.go = 255;
+    vla.data.data = 0;
     read_lr_data(&vla);
 
     if (vla.go == 1)

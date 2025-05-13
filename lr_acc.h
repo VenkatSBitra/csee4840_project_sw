@@ -9,7 +9,7 @@ typedef struct {
 
 typedef struct {
   lr_acc_data_t data;
-  short address;
+  int address;
   char go;
 } lr_acc_arg_t;
 
