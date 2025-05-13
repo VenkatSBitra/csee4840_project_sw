@@ -165,7 +165,7 @@ int main()
   fprintf(stderr, "s3: %d\n", obj.s3);
   fprintf(stderr, "s4: %d\n", obj.s4);
   fprintf(stderr, "s5: %d\n", obj.s5);
-  fprint(stderr, "Weights:\n");
+  fprintf(stderr, "Weights:\n");
   fprintf(stderr, "w0: %f\n", w0);
   fprintf(stderr, "w1: %f\n", w1);
 
