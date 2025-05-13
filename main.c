@@ -65,7 +65,7 @@ void set_lr_data(const lr_acc_arg_t *d)
   }
 }
 
-void read_lr_data(lr_acc_arg_t *d)
+void read_lr_data(lr_acc_read_data_t *d)
 {
   if (ioctl(lr_acc_fd, LR_ACC_READ_DATA, d))
   {
@@ -77,6 +77,7 @@ void read_lr_data(lr_acc_arg_t *d)
 int main()
 {
   lr_acc_arg_t vla;
+  lr_acc_read_data_t obj;
   int i;
   static const char filename[] = "/dev/lr_acc";
 
@@ -122,18 +123,35 @@ int main()
   while (1)
   {
     sleep(1);
-    vla.go = 255;
-    vla.data.data = 0;
-    read_lr_data(&vla);
+    read_lr_data(&obj);
 
-    if (vla.go == 1)
+    if (obj.master_done == 1)
       break;
   }
   
+  fprintf(stderr, "Device finished processing\n");
+  fprintf(stderr, "Results:\n");
+  fprintf(stderr, "d: %d\n", obj.d);
+  fprintf(stderr, "n0: %d\n", obj.n0);
+  fprintf(stderr, "n1: %d\n", obj.n1);
+  fprintf(stderr, "s1: %d\n", obj.s1);
+  fprintf(stderr, "s2: %d\n", obj.s2);
+  fprintf(stderr, "s3: %d\n", obj.s3);
+  fprintf(stderr, "s4: %d\n", obj.s4);
+  fprintf(stderr, "s5: %d\n", obj.s5);
 
-  fprintf(stderr, "First: %d\n", vla.address);
-  fprintf(stderr, "Second: %d\n", vla.address >> 8);
-  fprintf(stderr, "Third: %d\n", vla.address & 0xFF);
+  fprintf(stderr, "Calculating Weights\n");
+  double w0 = (double)obj.n0 / (double)obj.d;
+  double w1 = (double)obj.n1 / (double)obj.d;
+
+  fprintf(stderr, "w0: %f\n", w0);
+  fprintf(stderr, "w1: %f\n", w1);
+
+  fprintf(stderr, "Freeing allocated memory\n");
+  free(data);
+  free(d);
+  close(lr_acc_fd);
+  fprintf(stderr, "Closed the device file\n");
 
   fprintf(stderr, "LR Accumulator Userspace program terminating\n");
   return 0;

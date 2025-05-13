@@ -68,11 +68,8 @@ static void write_data(lr_acc_arg_t *data)
 	
 }
 
-static void read_data(lr_acc_arg_t *data)
+static void read_data(lr_acc_read_data_t *data)
 {
-	pr_info("Go value: %d\n", data->go);
-	pr_info("Address value: %d\n", data->address);
-
 	// fprintf(stderr, "Reading data...\n");
     int a  = ioread32(dev.virtbase + 0);
     int b  = ioread32(dev.virtbase + 4);
@@ -102,16 +99,15 @@ static void read_data(lr_acc_arg_t *data)
 	pr_info("Eighth: %d\n", h);
 	pr_info("Ninth: %d\n", i);
 
-	dev.read_data.a = a;
-	dev.read_data.b = b;
-	dev.read_data.c = c;
-	dev.read_data.d = d;
-	dev.read_data.e = e;
-	dev.read_data.f = f;
-	dev.read_data.g = g;
-
-	data->address = e;
-	data->go = a;
+	data->master_done = a;
+	data->d = b;
+	data->n0 = c;
+	data->n1 = d;
+	data->s1 = e;
+	data->s2 = f;
+	data->s3 = g;
+	data->s4 = h;
+	data->s5 = i;
 }
 /*
  * Handle ioctl() calls from userspace:
