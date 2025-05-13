@@ -117,6 +117,7 @@ static void read_data(lr_acc_read_data_t *data)
 static long lr_acc_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 {
 	lr_acc_arg_t vla;
+	lr_acc_read_data_t obj;
 
 	switch (cmd) {
 		case LR_ACC_WRITE_DATA:
@@ -127,10 +128,10 @@ static long lr_acc_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 			break;
 
 		case LR_ACC_READ_DATA:
-			read_data(&vla);
+			read_data(&obj);
 
-			if (copy_to_user((lr_acc_arg_t *) arg, &vla,
-					sizeof(lr_acc_arg_t)))
+			if (copy_to_user((lr_acc_read_data_t *) arg, &obj,
+					sizeof(lr_acc_read_data_t)))
 				return -EACCES;
 			
 			break;
