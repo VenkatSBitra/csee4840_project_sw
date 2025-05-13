@@ -55,9 +55,6 @@ struct lr_acc_dev {
 /* Write background color */
 static void write_data(lr_acc_arg_t *data)
 {
-	// fprintf(stderr, "Writing data...\n");
-	// short x = (data->data1 >> 4) & 0x0f | ((data->data2 >> 4) & 0x0f) << 4 | ((data->data3 >> 4) & 0x0f) << 8 | ((data->data4 >> 4) & 0x0f) << 12;
-	// short y = (data->data1 & 0x0f) | ((data->data2 & 0x0f) << 4) | ((data->data3 & 0x0f) << 8) | ((data->data4 & 0x0f) << 12);
 	if (data->go) {
 		iowrite32((u32)1, dev.virtbase + 4 * ((1 << 9) + data->address));
 	} else {
@@ -68,7 +65,6 @@ static void write_data(lr_acc_arg_t *data)
 
 static void read_data(lr_acc_read_data_t *data)
 {
-	// fprintf(stderr, "Reading data...\n");
     int a  = ioread32(dev.virtbase + 0);
     int b  = ioread32(dev.virtbase + 4);
     int c  = ioread32(dev.virtbase + 8);
