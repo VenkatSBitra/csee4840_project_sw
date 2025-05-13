@@ -121,7 +121,7 @@ int main()
   end = clock();
 
   cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-  fprintf(stderr, "Time taken to send data: %f seconds\n", cpu_time_used);
+  fprintf(stderr, "Time taken to send data: %f microseconds\n", cpu_time_used * 1e6);
 
   start = clock();
   vla.go = 1;
@@ -144,7 +144,7 @@ int main()
 
   end = clock();
   cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-  fprintf(stderr, "Time taken to process and read data: %f seconds\n", cpu_time_used);
+  fprintf(stderr, "Time taken to process and read data: %f microseconds\n", cpu_time_used * 1e6);
 
   start = clock();
 
@@ -153,7 +153,7 @@ int main()
 
   end = clock();
   cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-  fprintf(stderr, "Time taken to calculate weights: %f seconds\n", cpu_time_used);
+  fprintf(stderr, "Time taken to calculate weights: %f microseconds\n", cpu_time_used * 1e6);
   
   fprintf(stderr, "Device finished processing\n");
   fprintf(stderr, "Results:\n");
