@@ -128,10 +128,6 @@ int main()
   vla.address = n;
   set_lr_data(&vla);  
 
-  // fprintf(stderr, "Data sent to the device\n");
-
-  // fprintf(stderr, "Waiting for the device to finish processing...\n");
-
   while (1)
   {
     read_lr_data(&obj);
@@ -139,10 +135,11 @@ int main()
     if (obj.master_done == 1)
       break;
 
-    usleep(1); // Sleep for 1 microsecond
+    usleep(1); 
   }
 
   end = clock();
+
   cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
   fprintf(stderr, "Time taken to process and read data: %f microseconds\n", cpu_time_used * 1e6);
 
@@ -152,6 +149,8 @@ int main()
   double w1 = (double)obj.n1 / (double)obj.d;
 
   end = clock();
+
+  
   cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
   fprintf(stderr, "Time taken to calculate weights: %f microseconds\n", cpu_time_used * 1e6);
   
