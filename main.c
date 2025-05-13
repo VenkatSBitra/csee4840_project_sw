@@ -198,7 +198,7 @@ int main()
     sleep(1);
     read_lr_data(&vla);
 
-    if (vla.go == 0)
+    if (vla.go == 1)
       break;
   }
   
