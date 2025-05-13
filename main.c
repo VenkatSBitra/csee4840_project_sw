@@ -49,7 +49,7 @@ int read_data_from_array(char **data) {
     for (int i = 0; i < NUM_ENTRIES; i++) {
         unsigned int y = raw_data[i][0];
         unsigned int x = raw_data[i][1];
-        (*data)[i] = (x << 4) | y;
+        (*data)[i] = (y << 4) | x;
     }
 
     return NUM_ENTRIES;
@@ -168,6 +168,11 @@ int main()
 
   lr_acc_data_t *d = (lr_acc_data_t *)malloc(sizeof(lr_acc_data_t));
 
+  vla.go = 1;
+  vla.address = 0;
+
+  set_lr_data(&vla);
+
   for (int i = 0; i < n; i++) {
       d->data = data[i];
       vla.data = *d;
@@ -181,6 +186,7 @@ int main()
   }
 
   vla.go = 1;
+  vla.address = n;
   set_lr_data(&vla);  
 
   fprintf(stderr, "Data sent to the device\n");
