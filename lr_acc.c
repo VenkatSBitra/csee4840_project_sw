@@ -70,6 +70,8 @@ static void write_data(lr_acc_arg_t *data)
 
 static void read_data(lr_acc_arg_t *data)
 {
+	pr_info("Go value: %d\n", data->go);
+	
 	// fprintf(stderr, "Reading data...\n");
     int a  = ioread32(dev.virtbase + 0);
     int b  = ioread32(dev.virtbase + 4);
